@@ -1,0 +1,6 @@
+{
+    "tailwindCSS.includeLanguages": {
+      "plaintext": "html" // Habilita el autocompletado en archivos HTML sin extensión
+    },
+    "tailwindCSS.emmetCompletions": true // Activa las sugerencias de Emmet para clases de Tailwind
+  }
