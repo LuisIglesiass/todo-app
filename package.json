@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "npx tailwindcss -i ./input.css -o ./style.css --watch"
+    "build": "tailwindcss -i ./src/styles.css -o ./dist/output.css",
+    "watch": "tailwindcss -i ./src/styles.css -o ./dist/output.css --watch"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,6 @@
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.0.1"
   }
 }
