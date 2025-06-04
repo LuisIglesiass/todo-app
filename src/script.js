@@ -17,28 +17,19 @@ addButton.addEventListener("click", function () {
         return;
     }
 
-    const listItems = todoList.querySelectorAll('li'); // Obtener todos los <li>
+    const listItems = todoList.querySelectorAll('li'); 
     const itemCount = listItems.length; 
 
-
-    // Obtener las coordenadas del input y del div contenedor
     const inputRect = todoInput.getBoundingClientRect();
     const divRect = todoList.getBoundingClientRect();
 
     const startY = inputRect.top;
+    const offsetY = divRect.top - inputRect.top;  
 
-    // Calcular el desplazamiento
-    const offsetY = divRect.top - inputRect.top;  // Desplazamiento vertical
-
-    // Crear el elemento <li>
     const li = document.createElement("li");
     li.className = "flex items-center justify-between w-full p-2";
-
-    // Posicionar el <li> de manera absoluta durante la animación
     li.style.position = "absolute";
     li.style.top = `${inputRect.top}px`;
-
-    // Aplicar la animación
     li.style.animation = `moveElementToList 0.65s ease-in-out`;
     let totalHeight = 0;
     for (let i = 0; i < itemCount; i++) {
@@ -68,36 +59,27 @@ addButton.addEventListener("click", function () {
         </svg>
     `;
 
-    // Evento para eliminar la tarea
     removeBtn.addEventListener("click", function () {
         const li = this.parentElement;
         const nextSiblings = Array.from(li.nextElementSibling ? li.nextElementSibling.parentElement.children : []);
         const index = nextSiblings.indexOf(li);
 
-        // Aplicar animación de eliminación al elemento actual
         li.style.animation = `removeTask 1s ease-in-out`;
         li.addEventListener("animationend", () => {
             li.remove();
         });
 
-        // Aplicar animación de desplazamiento a los elementos restantes
         nextSiblings.slice(index + 1).forEach(sibling => {
             sibling.style.setProperty('--taskHeight', `${li.offsetHeight}px`);
             sibling.style.animation = `shiftUp 1s ease-in-out`;
         });
     });
 
-    // Agregar elementos al <li>
     li.appendChild(label);
     li.appendChild(removeBtn);
-
-    // Agregar <li> a la lista
     todoList.appendChild(li);
-
-    // Limpiar el input después de agregar la tarea
     todoInput.value = "";
 
-    // Restaurar el posicionamiento después de la animación
     li.addEventListener("animationend", () => {
         li.style.position = "static";
     });
